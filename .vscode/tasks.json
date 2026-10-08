@@ -1,0 +1,33 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Create About dir",
+			"type": "shell",
+			"command": "cmd /c mkdir client\\app\\about",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Create About dir Node",
+			"type": "shell",
+			"command": "node -e \"require('fs').mkdirSync('client\\\\app\\\\about', { recursive: true })\"",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "mkdir about route",
+			"type": "shell",
+			"command": "mkdir client\\app\\about",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "mkdir contact route",
+			"type": "shell",
+			"command": "mkdir client\\app\\contact",
+			"isBackground": false,
+			"problemMatcher": []
+		}
+	]
+}

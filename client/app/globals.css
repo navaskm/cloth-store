@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-bg: #F7F5F1;
+    --color-bg-secondary: #EFECE6;
+    --color-text-primary: #171717;
+    --color-text-secondary: #6B6862;
+    --color-border: #D9D5CE;
+    --color-dark: #181818;
+    --color-dark-text: #F7F5F1;
+    --color-accent: #9A7653;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text-primary);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  /* Focus visible styles for accessibility */
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+}
+
+@layer utilities {
+  .font-editorial {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+  }
+
+  /* Hide scrollbar visually but keep scroll functionality */
+  .scrollbar-hide {
+    scrollbar-width: none;        /* Firefox */
+    -ms-overflow-style: none;     /* IE 10+ */
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;                /* Chrome, Safari, Opera */
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0.4;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
