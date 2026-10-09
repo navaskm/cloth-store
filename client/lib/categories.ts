@@ -1,4 +1,5 @@
-import { ALL_PRODUCTS, CATEGORIES } from "@/lib/mockData";
+import { CATEGORIES } from "@/lib/catalogData";
+import { getProducts } from "@/lib/api";
 import type { Category, Product } from "@/lib/types";
 
 export function getCategoryBySlug(slug: string): Category | undefined {
@@ -9,10 +10,8 @@ export function getAllCategorySlugs(): string[] {
   return CATEGORIES.map((category) => category.slug);
 }
 
-export function getProductsByCategorySlug(slug: string): Product[] {
-  return ALL_PRODUCTS.filter(
-    (product) => product.categorySlug === slug && product.isActive !== false,
-  );
+export function getProductsByCategorySlug(slug: string): Promise<Product[]> {
+  return getProducts({ category: slug });
 }
 
 export function getRelatedCategories(category: Category): Category[] {

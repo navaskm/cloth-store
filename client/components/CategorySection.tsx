@@ -1,5 +1,5 @@
 import CategoryCard from "@/components/CategoryCard";
-import { CATEGORIES } from "@/lib/mockData";
+import { CATEGORIES } from "@/lib/catalogData";
 
 export default function CategorySection() {
   return (

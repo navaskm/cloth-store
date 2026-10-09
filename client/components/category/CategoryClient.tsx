@@ -12,7 +12,7 @@ import {
   getUniqueFits,
   getUniqueMaterials,
   getUniqueSizes,
-} from "@/lib/mockData";
+} from "@/lib/productOptions";
 import {
   DEFAULT_FILTERS,
   applyCatalogQuery,

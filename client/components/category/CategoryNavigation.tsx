@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CATEGORIES } from "@/lib/mockData";
+import { CATEGORIES } from "@/lib/catalogData";
 
 interface CategoryNavigationProps {
   activeSlug: string;

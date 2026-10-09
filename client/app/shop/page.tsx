@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import ShopHeader from "@/components/shop/ShopHeader";
 import ShopClient from "@/components/shop/ShopClient";
 import ShopEditorialCTA from "@/components/shop/ShopEditorialCTA";
-import { ALL_PRODUCTS } from "@/lib/mockData";
+import { getProducts } from "@/lib/api";
 
 export const metadata: Metadata = {
   title: "Shop Men's Collection — FORMEN",
@@ -14,9 +14,8 @@ export const metadata: Metadata = {
 };
 
 // Only include active products. In production, replace with an API/DB query.
-const activeProducts = ALL_PRODUCTS.filter((p) => p.isActive !== false);
-
-export default function ShopPage() {
+export default async function ShopPage() {
+  const activeProducts = await getProducts();
   return (
     <>
       <AnnouncementBar />

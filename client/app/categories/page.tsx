@@ -5,7 +5,8 @@ import AnnouncementBar from "@/components/AnnouncementBar";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import CategoryDirectoryCard from "@/components/categories/CategoryDirectoryCard";
-import { ALL_PRODUCTS, CATEGORIES } from "@/lib/mockData";
+import { CATEGORIES } from "@/lib/catalogData";
+import { getProducts } from "@/lib/api";
 
 export const metadata: Metadata = {
   title: "Men's Clothing Categories | FORMEN",
@@ -13,15 +14,11 @@ export const metadata: Metadata = {
     "Explore our collection of men's shirts, t-shirts, jeans, trousers, casual wear, formal wear and jackets.",
 };
 
-function getActiveProductCount(categorySlug: string): number {
-  return ALL_PRODUCTS.filter(
-    (product) =>
-      product.categorySlug === categorySlug && product.isActive !== false,
-  ).length;
-}
-
-export default function CategoriesPage() {
+export default async function CategoriesPage() {
+  const products = await getProducts();
   const [featuredCategory, ...directoryCategories] = CATEGORIES;
+  const getActiveProductCount = (categorySlug: string) =>
+    products.filter((product) => product.categorySlug === categorySlug).length;
 
   return (
     <>

@@ -1,9 +1,5 @@
-import {
-  ALL_PRODUCTS,
-  PRODUCT_DETAIL_COPY,
-  PRODUCT_GALLERIES,
-  SIZE_GUIDES,
-} from "@/lib/mockData";
+import { getProductBySlug as fetchProductBySlug, getProducts } from "@/lib/api";
+import { PRODUCT_DETAIL_COPY, PRODUCT_GALLERIES, SIZE_GUIDES } from "@/lib/catalogData";
 import type { Product, ProductImage, SizeGuide } from "@/lib/types";
 
 export type ProductDetail = Product & {
@@ -100,30 +96,21 @@ export function enrichProduct(product: Product): ProductDetail {
   };
 }
 
-export function getProductBySlug(slug: string): ProductDetail | undefined {
-  const product = ALL_PRODUCTS.find(
-    (p) => p.slug === slug && p.isActive !== false,
-  );
-  if (!product) {
+export async function getProductBySlug(slug: string): Promise<ProductDetail | undefined> {
+  try {
+    return enrichProduct(await fetchProductBySlug(slug));
+  } catch {
     return undefined;
   }
-  return enrichProduct(product);
 }
 
-export function getRelatedProducts(product: Product, limit = 4): Product[] {
-  const sameCategory = ALL_PRODUCTS.filter(
-    (p) =>
-      p.id !== product.id &&
-      p.isActive !== false &&
-      p.categorySlug === product.categorySlug,
+export async function getRelatedProducts(product: Product, limit = 4): Promise<Product[]> {
+  const sameCategory = (await getProducts({ category: product.categorySlug })).filter(
+    (item) => item.id !== product.id,
   );
-  const pool =
-    sameCategory.length >= limit
-      ? sameCategory
-      : ALL_PRODUCTS.filter(
-          (p) => p.id !== product.id && p.isActive !== false,
-        );
-  return pool.slice(0, limit);
+  if (sameCategory.length >= limit) return sameCategory.slice(0, limit);
+  const allProducts = await getProducts();
+  return allProducts.filter((item) => item.id !== product.id).slice(0, limit);
 }
 
 export function getSizeGuideForProduct(
