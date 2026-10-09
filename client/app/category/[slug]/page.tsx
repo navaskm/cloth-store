@@ -45,7 +45,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
     notFound();
   }
 
-  const products = getProductsByCategorySlug(slug);
+  const products = await getProductsByCategorySlug(slug);
   const related = getRelatedCategories(category);
 
   return (

@@ -1,8 +1,9 @@
 import Link from "next/link";
 import ProductCard from "@/components/ProductCard";
-import { NEW_ARRIVALS } from "@/lib/mockData";
+import { getProducts } from "@/lib/api";
 
-export default function ProductSection() {
+export default async function ProductSection() {
+  const newArrivals = (await getProducts({ sort: "newest" })).slice(0, 4);
   return (
     <section
       className="bg-[#EFECE6] py-20 lg:py-28"
@@ -35,7 +36,7 @@ export default function ProductSection() {
 
         {/* Product Grid */}
         <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-10 md:gap-x-5 lg:gap-x-6">
-          {NEW_ARRIVALS.map((product) => (
+          {newArrivals.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>

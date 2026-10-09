@@ -5,8 +5,8 @@ import Breadcrumb from "@/components/Breadcrumb";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import ProductCard from "@/components/ProductCard";
-import { ALL_PRODUCTS, CATEGORIES } from "@/lib/mockData";
-import { searchProducts, sortSearchProducts } from "@/lib/searchProducts";
+import { CATEGORIES } from "@/lib/catalogData";
+import { getProducts } from "@/lib/api";
 import type { SortOption } from "@/lib/types";
 
 type SearchParams = {
@@ -53,9 +53,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
   const requestedSort = firstParam(params.sort);
   const sort: SortOption = isSortOption(requestedSort) ? requestedSort : "recommended";
 
-  let results = searchProducts(ALL_PRODUCTS, query);
-  if (category) results = results.filter((product) => product.categorySlug === category);
-  results = sortSearchProducts(results, sort);
+  const results = await getProducts({ query, category, sort });
 
   const hasQuery = query.length > 0;
   const resultLabel = results.length === 1 ? "piece" : "pieces";
