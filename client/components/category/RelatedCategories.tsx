@@ -30,7 +30,7 @@ export default function RelatedCategories({
       </div>
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
         {categories.map((category) => (
-          <CategoryCard key={category.id} category={category} />
+          <CategoryCard key={category._id} category={category} />
         ))}
       </div>
     </section>

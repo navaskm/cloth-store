@@ -16,10 +16,3 @@ export async function getAllCategorySlugs(): Promise<string[]> {
 export function getProductsByCategorySlug(slug: string): Promise<Product[]> {
   return getProducts({ category: slug });
 }
-
-export function getRelatedCategories(category: Category, categories: Category[]): Category[] {
-  return category.relatedSlugs
-    .map((relatedSlug) => categories.find((item) => item.slug === relatedSlug))
-    .filter((related): related is Category => related !== undefined)
-    .slice(0, 4);
-}

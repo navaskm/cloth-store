@@ -1,7 +1,7 @@
 import type { Product } from "@/lib/types";
 
 export function getUniqueBrands(products: Product[]): string[] {
-  return [...new Set(products.map((product) => product.brand))].sort();
+  return [...new Set(products.map((product) => product.brand).filter((brand): brand is string => Boolean(brand)))].sort();
 }
 
 export function getUniqueSizes(products: Product[]): string[] {
@@ -9,25 +9,13 @@ export function getUniqueSizes(products: Product[]): string[] {
 }
 
 export function getUniqueColors(products: Product[]): string[] {
-  return [...new Set(products.flatMap((product) => product.colors ?? []))].sort();
+  return [];
 }
 
 export function getUniqueFits(products: Product[]): string[] {
-  return [
-    ...new Set(
-      products
-        .map((product) => product.fit)
-        .filter((fit): fit is string => Boolean(fit)),
-    ),
-  ].sort();
+  return [];
 }
 
 export function getUniqueMaterials(products: Product[]): string[] {
-  return [
-    ...new Set(
-      products
-        .map((product) => product.material)
-        .filter((material): material is string => Boolean(material)),
-    ),
-  ].sort();
+  return [];
 }

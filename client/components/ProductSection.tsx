@@ -3,7 +3,7 @@ import ProductCard from "@/components/ProductCard";
 import { getProducts } from "@/lib/api";
 
 export default async function ProductSection() {
-  const newArrivals = (await getProducts({ sort: "newest" })).slice(0, 4);
+  const newArrivals = (await getProducts()).slice(0, 4);
   return (
     <section
       className="bg-[#EFECE6] py-20 lg:py-28"
@@ -37,7 +37,7 @@ export default async function ProductSection() {
         {/* Product Grid */}
         <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-10 md:gap-x-5 lg:gap-x-6">
           {newArrivals.map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard key={product._id} product={product} />
           ))}
         </div>
 

@@ -6,9 +6,6 @@ export type ProductDetail = Product & {
   images: ProductImage[];
   description: string;
   detailsParagraph: string;
-  pattern: string;
-  color: string;
-  collection: string;
   sizeGuideType: SizeGuide["type"];
 };
 
@@ -49,12 +46,6 @@ function buildDefaultGallery(product: Product): ProductImage[] {
       alt: `${product.name} front view`,
     },
   ];
-  if (product.hoverImageUrl) {
-    images.push({
-      src: upscaleImageUrl(product.hoverImageUrl),
-      alt: `${product.name} alternate view`,
-    });
-  }
   if (images.length < 3) {
     images.push({
       src: upscaleImageUrl(product.imageUrl),
@@ -65,7 +56,7 @@ function buildDefaultGallery(product: Product): ProductImage[] {
 }
 
 function defaultDescription(product: Product): string {
-  return `${product.name} from ${product.brand}. ${product.material ?? "Premium fabric"} with a ${product.fit?.toLowerCase() ?? "refined fit"} — designed for modern everyday wear.`;
+  return `${product.name}${product.brand ? ` from ${product.brand}` : ""}. Designed for modern everyday wear.`;
 }
 
 function defaultDetailsParagraph(product: Product): string {
@@ -85,13 +76,6 @@ export function enrichProduct(product: Product): ProductDetail {
     description: product.description ?? copy?.description ?? defaultDescription(product),
     detailsParagraph:
       copy?.detailsParagraph ?? defaultDetailsParagraph(product),
-    pattern: product.pattern ?? copy?.pattern ?? "Solid",
-    color:
-      product.color ??
-      copy?.color ??
-      product.colors?.[0] ??
-      "—",
-    collection: product.collection ?? copy?.collection ?? "Essentials",
     sizeGuideType: inferSizeGuideType(product),
   };
 }
@@ -106,11 +90,11 @@ export async function getProductBySlug(slug: string): Promise<ProductDetail | un
 
 export async function getRelatedProducts(product: Product, limit = 4): Promise<Product[]> {
   const sameCategory = (await getProducts({ category: product.categorySlug })).filter(
-    (item) => item.id !== product.id,
+    (item) => item._id !== product._id,
   );
   if (sameCategory.length >= limit) return sameCategory.slice(0, limit);
   const allProducts = await getProducts();
-  return allProducts.filter((item) => item.id !== product.id).slice(0, limit);
+  return allProducts.filter((item) => item._id !== product._id).slice(0, limit);
 }
 
 export function getSizeGuideForProduct(

@@ -31,7 +31,7 @@ export default function ProductGrid({
         aria-label="Products"
       >
         {products.map((product) => (
-          <div key={product.id} role="listitem">
+          <div key={product._id} role="listitem">
             <ProductCard product={product} />
           </div>
         ))}

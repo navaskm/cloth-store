@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { Product } from "../models/Product.js";
+import { PRODUCT_PUBLIC_FIELDS, Product } from "../models/Product.js";
 
 const router = Router();
 
@@ -8,10 +8,8 @@ router.get("/", async (req, res) => {
     const query = typeof req.query.q === "string" ? req.query.q.trim() : "";
     const category = typeof req.query.category === "string" ? req.query.category : "";
     const sort = typeof req.query.sort === "string" ? req.query.sort : "recommended";
-    const trending = req.query.trending === "true";
 
-    const filter: Record<string, unknown> = { isActive: { $ne: false } };
-    if (trending) filter.isTrending = true;
+    const filter: Record<string, unknown> = {};
     if (category) filter.categorySlug = category;
     if (query) {
       const terms = query.split(/\s+/).filter(Boolean).map((term) => term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
@@ -21,25 +19,21 @@ router.get("/", async (req, res) => {
         { category: { $regex: expression, $options: "i" } },
         { brand: { $regex: expression, $options: "i" } },
         { description: { $regex: expression, $options: "i" } },
-        { color: { $regex: expression, $options: "i" } },
-        { material: { $regex: expression, $options: "i" } },
-        { fit: { $regex: expression, $options: "i" } },
-        { colors: { $regex: expression, $options: "i" } },
       ];
     }
 
     const sortValue: Record<string, 1 | -1> =
       sort === "newest"
-        ? { isNew: -1 }
+        ? { createdAt: -1 }
         : sort === "price-asc"
           ? { price: 1 }
           : sort === "price-desc"
             ? { price: -1 }
             : sort === "name-asc"
               ? { name: 1 }
-              : { isFeatured: -1, name: 1 };
+              : { name: 1 };
 
-    const products = await Product.find(filter).sort(sortValue).lean();
+    const products = await Product.find(filter).select(PRODUCT_PUBLIC_FIELDS).sort(sortValue).lean();
     res.json({ success: true, data: products });
   } catch (error) {
     console.error("Failed to load products", error);
@@ -49,7 +43,7 @@ router.get("/", async (req, res) => {
 
 router.get("/:slug", async (req, res) => {
   try {
-    const product = await Product.findOne({ slug: req.params.slug, isActive: { $ne: false } }).lean();
+    const product = await Product.findOne({ slug: req.params.slug }).select(PRODUCT_PUBLIC_FIELDS).lean();
     if (!product) {
       res.status(404).json({ success: false, message: "Product not found" });
       return;

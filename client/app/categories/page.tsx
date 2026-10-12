@@ -3,7 +3,7 @@ import Link from "next/link";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import CategoryDirectoryCard from "@/components/categories/CategoryDirectoryCard";
-import { getCategories, getProducts } from "@/lib/api";
+import { getCategories } from "@/lib/api";
 
 export const metadata: Metadata = {
   title: "Men's Clothing Categories | FORMEN",
@@ -12,10 +12,7 @@ export const metadata: Metadata = {
 };
 
 export default async function CategoriesPage() {
-
-  const [products, categories] = await Promise.all([getProducts(), getCategories()]);
-  const getActiveProductCount = (categorySlug: string) =>
-    products.filter((product) => product.categorySlug === categorySlug).length;
+  const categories = await getCategories();
 
   return (
     <>
@@ -40,9 +37,8 @@ export default async function CategoriesPage() {
           <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {categories.map((category) => (
               <CategoryDirectoryCard
-                key={category.id}
+                key={category._id}
                 category={category}
-                productCount={getActiveProductCount(category.slug)}
               />
             ))}
           </div>

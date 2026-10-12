@@ -14,8 +14,8 @@ export default function CategoryEditorial({ category }: CategoryEditorialProps) 
       aria-labelledby="category-editorial-heading"
     >
       <Image
-        src={category.editorialImageUrl}
-        alt={category.editorialImageAlt}
+        src={category.heroImageUrl}
+        alt={category.name}
         fill
         sizes="100vw"
         className="object-cover object-center"
@@ -29,9 +29,6 @@ export default function CategoryEditorial({ category }: CategoryEditorialProps) 
           >
             {category.editorialHeading}
           </h2>
-          <p className="text-sm text-[#D9D5CE] mb-10 tracking-wide font-light leading-relaxed">
-            {category.editorialText}
-          </p>
           <Link
             href={`/category/${category.slug}`}
             className="inline-block border border-[#F7F5F1] text-[#F7F5F1] text-xs tracking-[0.2em] font-semibold px-8 py-4 hover:bg-[#F7F5F1] hover:text-[#171717] transition-all duration-300"

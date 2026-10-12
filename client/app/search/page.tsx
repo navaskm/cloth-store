@@ -118,7 +118,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
               <section className="max-w-screen-xl mx-auto px-5 py-12 lg:px-10 md:py-16" aria-labelledby="results-heading">
                 <h2 id="results-heading" className="sr-only">Search results for {query}</h2>
                 <div className="grid grid-cols-2 gap-x-4 gap-y-12 md:grid-cols-3 md:gap-x-5 lg:grid-cols-4 lg:gap-x-6" role="list">
-                  {results.map((product) => <div key={product.id} role="listitem"><ProductCard product={product} /></div>)}
+                  {results.map((product) => <div key={product._id} role="listitem"><ProductCard product={product} /></div>)}
                 </div>
               </section>
             ) : <NoResults query={query} categories={categories} />}

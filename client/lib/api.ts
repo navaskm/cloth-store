@@ -33,14 +33,16 @@ export function getProducts(options: {
   query?: string;
   category?: string;
   sort?: string;
-  trending?: boolean;
 } = {}): Promise<Product[]> {
   return request<Product[]>(`/products${queryString({
     q: options.query,
     category: options.category,
     sort: options.sort,
-    trending: options.trending ? "true" : undefined,
   })}`);
+}
+
+export function getTrendingProducts(): Promise<Product[]> {
+  return request<Product[]>("/trending-products");
 }
 
 export function getCategories(): Promise<Category[]> {

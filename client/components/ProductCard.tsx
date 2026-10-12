@@ -23,18 +23,12 @@ export default function ProductCard({ product }: ProductCardProps) {
       >
         <Image
           src={product.imageUrl}
-          alt={product.imageAlt}
+          alt={product.name}
           fill
           sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
           className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.04]"
         />
 
-        {/* New badge */}
-        {product.isNew && (
-          <span className="absolute top-3 left-3 bg-[#171717] text-[#F7F5F1] text-[9px] tracking-[0.2em] px-2.5 py-1 font-semibold">
-            NEW
-          </span>
-        )}
       </div>
 
       {/* Product Info */}
@@ -45,7 +39,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         <h3 className="text-sm font-medium text-[#171717] tracking-wide group-hover:text-[#9A7653] transition-colors duration-200">
           {product.name}
         </h3>
-        <p className="text-xs text-[#6B6862] tracking-wide">{product.brand}</p>
+        {product.brand && <p className="text-xs text-[#6B6862] tracking-wide">{product.brand}</p>}
         <p className="text-sm font-semibold text-[#171717] pt-1">
           {formattedPrice}
         </p>

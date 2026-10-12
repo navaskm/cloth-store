@@ -1,8 +1,8 @@
 import ProductCard from "@/components/ProductCard";
-import { getProducts } from "@/lib/api";
+import { getTrendingProducts } from "@/lib/api";
 
 export default async function TrendingSection() {
-  const trendingProducts = await getProducts({ trending: true, sort: "recommended" });
+  const trendingProducts = await getTrendingProducts();
 
   return (
     <section
@@ -33,7 +33,7 @@ export default async function TrendingSection() {
         <div className="-mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4 scrollbar-hide lg:-mx-10 lg:gap-5 lg:px-10">
           {trendingProducts.map((product) => (
             <div
-              key={product.id}
+              key={product._id}
               className="w-[72vw] min-w-[72vw] snap-start sm:w-[42vw] sm:min-w-[42vw] md:w-[29vw] md:min-w-[29vw] lg:w-[23%] lg:min-w-[23%]"
             >
               <ProductCard product={product} />

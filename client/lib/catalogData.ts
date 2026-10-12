@@ -23,10 +23,9 @@ export const PRODUCT_GALLERIES: Record<string, Product["images"]> = {
   ],
 };
 
-export const PRODUCT_DETAIL_COPY: Record<string, { description: string; detailsParagraph: string; pattern?: string; color?: string; collection?: string }> = {
+export const PRODUCT_DETAIL_COPY: Record<string, { description: string; detailsParagraph: string }> = {
   "premium-oxford-shirt": {
     description: "A refined Oxford shirt crafted for everyday versatility. Designed with a clean silhouette, soft cotton construction and timeless detailing.",
     detailsParagraph: "Designed for everyday versatility, the Premium Oxford Shirt combines classic construction with a contemporary silhouette. Finished with a structured collar and mother-of-pearl-inspired buttons for a polished look.",
-    pattern: "Solid", color: "Sky Blue", collection: "Essentials",
   },
 };
