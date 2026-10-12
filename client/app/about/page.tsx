@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import AnnouncementBar from "@/components/AnnouncementBar";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 
@@ -75,10 +74,9 @@ const approachItems: ApproachItem[] = [
 export default function AboutPage() {
   return (
     <>
-      <AnnouncementBar />
       <Navbar />
 
-      <main className="mt-24 bg-[#F7F5F1] min-h-screen">
+      <main className="mt-16 bg-[#F7F5F1] min-h-screen">
 
         <section className="max-w-screen-xl mx-auto px-5 lg:px-10 pt-10 pb-16 md:pt-12 md:pb-20">
           <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-8 lg:gap-12 items-end">

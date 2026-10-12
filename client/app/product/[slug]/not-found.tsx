@@ -1,15 +1,13 @@
 import Link from "next/link";
-import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export default function ProductNotFound() {
   return (
     <>
-      <AnnouncementBar />
       <Navbar />
 
-      <main className="mt-24 bg-[#F7F5F1] min-h-[60vh] flex items-center">
+      <main className="mt-16 bg-[#F7F5F1] min-h-[60vh] flex items-center">
         <div className="max-w-screen-xl mx-auto px-5 lg:px-10 py-24 text-center w-full">
           <p className="text-[10px] tracking-[0.25em] text-[#9A7653] font-semibold uppercase mb-4">
             404

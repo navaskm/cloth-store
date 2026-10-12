@@ -15,7 +15,7 @@ async function seed() {
     await Product_js_1.Product.bulkWrite(products_js_1.products.map((product) => ({
         updateOne: {
             filter: { id: product.id },
-            update: { $set: product },
+            update: { $set: product, $unset: { currency: 1 } },
             upsert: true,
         },
     })));

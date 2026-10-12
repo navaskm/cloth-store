@@ -40,7 +40,6 @@ export interface Product {
   price: number;
   /** Original price when on sale; display price uses `price` */
   compareAtPrice?: number;
-  currency: string;
   imageUrl: string;
   imageAlt: string;
   hoverImageUrl?: string;

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CategoryHero from "@/components/category/CategoryHero";
@@ -50,10 +49,9 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
 
   return (
     <>
-      <AnnouncementBar />
       <Navbar />
 
-      <main className="mt-24 bg-[#F7F5F1] min-h-screen overflow-x-hidden">
+      <main className="mt-16 bg-[#F7F5F1] min-h-screen overflow-x-hidden">
         <CategoryHero category={category} productCount={products.length} />
         <CategoryNavigation activeSlug={category.slug} />
         <CategoryClient categoryName={category.name} products={products} />

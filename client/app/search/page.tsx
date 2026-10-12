@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import AnnouncementBar from "@/components/AnnouncementBar";
 import Breadcrumb from "@/components/Breadcrumb";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
@@ -60,10 +59,9 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
 
   return (
     <>
-      <AnnouncementBar />
       <Navbar />
 
-      <main className="mt-24 min-h-screen overflow-x-hidden bg-[#F7F5F1]">
+      <main className="mt-16 min-h-screen overflow-x-hidden bg-[#F7F5F1]">
         <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Search" }]} />
 
         <section className="max-w-screen-xl mx-auto px-5 pt-10 pb-12 lg:px-10 md:pt-14 md:pb-16">

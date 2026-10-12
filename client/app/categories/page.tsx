@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import AnnouncementBar from "@/components/AnnouncementBar";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import CategoryDirectoryCard from "@/components/categories/CategoryDirectoryCard";
@@ -22,10 +21,9 @@ export default async function CategoriesPage() {
 
   return (
     <>
-      <AnnouncementBar />
       <Navbar />
 
-      <main className="mt-24 min-h-screen overflow-x-hidden bg-[#F7F5F1]">
+      <main className="mt-16 min-h-screen overflow-x-hidden bg-[#F7F5F1]">
 
         <section className="max-w-screen-xl mx-auto px-5 pt-10 pb-16 lg:px-10 md:pt-14 md:pb-24">
           <div className="grid items-end gap-10 lg:grid-cols-[1fr_0.7fr] lg:gap-16">
