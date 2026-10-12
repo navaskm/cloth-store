@@ -6,12 +6,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const products_js_1 = __importDefault(require("./routes/products.js"));
+const categories_js_1 = __importDefault(require("./routes/categories.js"));
 const app = (0, express_1.default)();
 // Middleware
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use("/api/products", products_js_1.default);
+app.use("/api/categories", categories_js_1.default);
 // Test route
 app.get("/", (_req, res) => {
     res.json({

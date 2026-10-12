@@ -1,4 +1,4 @@
-import type { Product } from "@/lib/types";
+import type { Category, Product } from "@/lib/types";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000/api";
 
@@ -39,6 +39,10 @@ export function getProducts(options: {
     category: options.category,
     sort: options.sort,
   })}`);
+}
+
+export function getCategories(): Promise<Category[]> {
+  return request<Category[]>("/categories");
 }
 
 export function getProductBySlug(slug: string): Promise<Product> {
