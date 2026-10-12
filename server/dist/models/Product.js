@@ -25,6 +25,7 @@ const productSchema = new mongoose_1.Schema({
     description: String,
     isNew: Boolean,
     isFeatured: Boolean,
+    isTrending: { type: Boolean, default: false, index: true },
     isActive: { type: Boolean, default: true, index: true },
 }, { timestamps: true, versionKey: false });
 exports.Product = mongoose_1.models.Product || (0, mongoose_1.model)("Product", productSchema);

@@ -55,6 +55,7 @@ export interface Product {
   description?: string;
   isNew?: boolean;
   isFeatured?: boolean;
+  isTrending?: boolean;
   isActive?: boolean;
   /** Controls which size guide table to show on the detail page */
   sizeGuideType?: "shirt" | "trouser" | "jacket" | "tshirt";

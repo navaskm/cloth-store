@@ -21,5 +21,6 @@ export interface ProductDocument {
   description?: string;
   isNew?: boolean;
   isFeatured?: boolean;
+  isTrending?: boolean;
   isActive?: boolean;
 }

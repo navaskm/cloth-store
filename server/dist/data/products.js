@@ -4,7 +4,7 @@ exports.products = void 0;
 exports.products = [
     {
         id: "prod-1", name: "Premium Oxford Shirt", brand: "Van Heusen", category: "Shirts", categorySlug: "shirts", slug: "premium-oxford-shirt", price: 1299, compareAtPrice: 1499,
-        imageUrl: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=600&q=80", imageAlt: "Premium Oxford Shirt in white", hoverImageUrl: "https://images.unsplash.com/photo-1598033129183-c4f50c736f10?w=600&q=80", sizes: ["S", "M", "L", "XL", "XXL"], colors: ["White", "Light Blue", "Navy"], material: "100% Premium Cotton", fit: "Regular Fit", isNew: true, isFeatured: true, isActive: true,
+        imageUrl: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=600&q=80", imageAlt: "Premium Oxford Shirt in white", hoverImageUrl: "https://images.unsplash.com/photo-1598033129183-c4f50c736f10?w=600&q=80", sizes: ["S", "M", "L", "XL", "XXL"], colors: ["White", "Light Blue", "Navy"], material: "100% Premium Cotton", fit: "Regular Fit", isNew: true, isFeatured: true, isTrending: true, isActive: true,
     },
     {
         id: "prod-2", name: "Classic Linen Shirt", brand: "Raymond", category: "Shirts", categorySlug: "shirts", slug: "classic-linen-shirt", price: 1599,
@@ -20,7 +20,7 @@ exports.products = [
     },
     {
         id: "prod-5", name: "Essential Oversized T-Shirt", brand: "Urban Basics", category: "T-Shirts", categorySlug: "t-shirts", slug: "essential-oversized-tshirt", price: 799,
-        imageUrl: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&q=80", imageAlt: "Essential Oversized T-Shirt in black", sizes: ["S", "M", "L", "XL", "XXL"], colors: ["Black", "White", "Charcoal"], material: "100% Combed Cotton", fit: "Oversized Fit", isNew: true, isActive: true,
+        imageUrl: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&q=80", imageAlt: "Essential Oversized T-Shirt in black", sizes: ["S", "M", "L", "XL", "XXL"], colors: ["Black", "White", "Charcoal"], material: "100% Combed Cotton", fit: "Oversized Fit", isNew: true, isTrending: true, isActive: true,
     },
     {
         id: "prod-6", name: "Classic Crew Neck T-Shirt", brand: "H&M", category: "T-Shirts", categorySlug: "t-shirts", slug: "classic-crew-neck-tshirt", price: 699,
@@ -32,7 +32,7 @@ exports.products = [
     },
     {
         id: "prod-8", name: "Classic Straight Jeans", brand: "Levi's", category: "Jeans", categorySlug: "jeans", slug: "classic-straight-jeans", price: 2499,
-        imageUrl: "https://images.unsplash.com/photo-1542272604-787c3835535d?w=600&q=80", imageAlt: "Classic Straight Jeans in dark wash", sizes: ["28", "30", "32", "34", "36"], colors: ["Dark Wash", "Medium Wash", "Black"], material: "98% Cotton, 2% Elastane", fit: "Straight Fit", isNew: true, isFeatured: true, isActive: true,
+        imageUrl: "https://images.unsplash.com/photo-1542272604-787c3835535d?w=600&q=80", imageAlt: "Classic Straight Jeans in dark wash", sizes: ["28", "30", "32", "34", "36"], colors: ["Dark Wash", "Medium Wash", "Black"], material: "98% Cotton, 2% Elastane", fit: "Straight Fit", isNew: true, isFeatured: true, isTrending: true, isActive: true,
     },
     {
         id: "prod-9", name: "Relaxed Fit Jeans", brand: "Wrangler", category: "Jeans", categorySlug: "jeans", slug: "relaxed-fit-jeans", price: 1999,
@@ -60,7 +60,7 @@ exports.products = [
     },
     {
         id: "prod-15", name: "Textured Casual Jacket", brand: "Mufti", category: "Jackets", categorySlug: "jackets", slug: "textured-casual-jacket", price: 3499,
-        imageUrl: "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=600&q=80", imageAlt: "Textured Casual Jacket in brown", sizes: ["S", "M", "L", "XL"], colors: ["Brown", "Olive", "Charcoal"], material: "Polyester Tweed", fit: "Regular Fit", isNew: true, isFeatured: true, isActive: true,
+        imageUrl: "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=600&q=80", imageAlt: "Textured Casual Jacket in brown", sizes: ["S", "M", "L", "XL"], colors: ["Brown", "Olive", "Charcoal"], material: "Polyester Tweed", fit: "Regular Fit", isNew: true, isFeatured: true, isTrending: true, isActive: true,
     },
     {
         id: "prod-16", name: "Minimal Bomber Jacket", brand: "H&M", category: "Jackets", categorySlug: "jackets", slug: "minimal-bomber-jacket", price: 2999,

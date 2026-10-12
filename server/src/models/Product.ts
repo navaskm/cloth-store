@@ -25,6 +25,7 @@ const productSchema = new Schema<ProductDocument>(
     description: String,
     isNew: Boolean,
     isFeatured: Boolean,
+    isTrending: { type: Boolean, default: false, index: true },
     isActive: { type: Boolean, default: true, index: true },
   },
   { timestamps: true, versionKey: false },

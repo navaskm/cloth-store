@@ -8,8 +8,10 @@ router.get("/", async (req, res) => {
     const query = typeof req.query.q === "string" ? req.query.q.trim() : "";
     const category = typeof req.query.category === "string" ? req.query.category : "";
     const sort = typeof req.query.sort === "string" ? req.query.sort : "recommended";
+    const trending = req.query.trending === "true";
 
     const filter: Record<string, unknown> = { isActive: { $ne: false } };
+    if (trending) filter.isTrending = true;
     if (category) filter.categorySlug = category;
     if (query) {
       const terms = query.split(/\s+/).filter(Boolean).map((term) => term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
