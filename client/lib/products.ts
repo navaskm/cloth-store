@@ -120,5 +120,5 @@ export function getSizeGuideForProduct(
 }
 
 export function formatProductPrice(product: Product): string {
-  return `${product.currency}${product.price.toLocaleString("en-IN")}`;
+  return `₹${product.price.toLocaleString("en-IN")}`;
 }

@@ -1,13 +1,14 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Product } from "@/lib/types";
+import { formatProductPrice } from "@/lib/products";
 
 interface ProductCardProps {
   product: Product;
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
-  const formattedPrice = `${product.currency}${product.price.toLocaleString("en-IN")}`;
+  const formattedPrice = formatProductPrice(product);
 
   return (
     <Link

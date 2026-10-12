@@ -1,4 +1,3 @@
-import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import CategorySection from "@/components/CategorySection";
@@ -12,14 +11,12 @@ import Footer from "@/components/Footer";
 export default function Home() {
   return (
     <>
-      {/* Fixed announcement bar + navbar (heights: 2rem + 4rem = 6rem) */}
-      <AnnouncementBar />
       <Navbar />
 
       {/* Main content pushed below fixed header */}
       <main>
         {/* 1. Hero */}
-        <div className="mt-24">
+        <div className="mt-16">
           <HeroSection />
         </div>
 

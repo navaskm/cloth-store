@@ -11,7 +11,6 @@ const productSchema = new Schema<ProductDocument>(
     slug: { type: String, required: true, unique: true, trim: true, index: true },
     price: { type: Number, required: true, min: 0 },
     compareAtPrice: { type: Number, min: 0 },
-    currency: { type: String, required: true, default: "₹" },
     imageUrl: { type: String, required: true },
     imageAlt: { type: String, required: true },
     hoverImageUrl: String,

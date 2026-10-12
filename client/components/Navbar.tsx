@@ -44,7 +44,7 @@ export default function Navbar() {
     <>
       <header
         role="banner"
-        className={`fixed top-8 left-0 right-0 z-40 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
           isScrolled
             ? "bg-[#F7F5F1]/95 backdrop-blur-sm shadow-[0_1px_0_0_#D9D5CE]"
             : "bg-[#F7F5F1]/90 backdrop-blur-sm border-b border-[#D9D5CE]"

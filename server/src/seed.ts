@@ -13,7 +13,7 @@ async function seed() {
     products.map((product) => ({
       updateOne: {
         filter: { id: product.id },
-        update: { $set: product },
+        update: { $set: product, $unset: { currency: 1 } },
         upsert: true,
       },
     })),

@@ -5,7 +5,7 @@ import CategoryNavigation from "@/components/shop/CategoryNavigation";
 import ShopControls from "@/components/shop/ShopControls";
 import ProductGrid from "@/components/shop/ProductGrid";
 import FilterPanel from "@/components/shop/FilterPanel";
-import { Product, SortOption } from "@/lib/types";
+import { Category, Product, SortOption } from "@/lib/types";
 import {
   getUniqueBrands,
   getUniqueSizes,
@@ -21,9 +21,10 @@ import {
 
 interface ShopClientProps {
   products: Product[];
+  categories: Category[];
 }
 
-export default function ShopClient({ products }: ShopClientProps) {
+export default function ShopClient({ products, categories }: ShopClientProps) {
   
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState("");
@@ -66,6 +67,7 @@ export default function ShopClient({ products }: ShopClientProps) {
       <CategoryNavigation
         activeCategory={activeCategory}
         onCategoryChange={setActiveCategory}
+        categories={categories}
       />
 
       <div className="max-w-screen-xl mx-auto px-5 lg:px-10 py-10 lg:py-14">

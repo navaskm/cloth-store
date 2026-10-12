@@ -7,7 +7,6 @@ export interface ProductDocument {
   slug: string;
   price: number;
   compareAtPrice?: number;
-  currency: string;
   imageUrl: string;
   imageAlt: string;
   hoverImageUrl?: string;

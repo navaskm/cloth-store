@@ -12,7 +12,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
   const formattedPrice = formatProductPrice(product);
   const compareAt =
     product.compareAtPrice != null
-      ? `${product.currency}${product.compareAtPrice.toLocaleString("en-IN")}`
+      ? `₹${product.compareAtPrice.toLocaleString("en-IN")}`
       : null;
 
   return (

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CategoryHero from "@/components/category/CategoryHero";
@@ -9,6 +8,7 @@ import CategoryClient from "@/components/category/CategoryClient";
 import CategoryEditorial from "@/components/category/CategoryEditorial";
 import RelatedCategories from "@/components/category/RelatedCategories";
 import {
+  getCategories,
   getAllCategorySlugs,
   getCategoryBySlug,
   getProductsByCategorySlug,
@@ -19,15 +19,15 @@ interface CategoryPageProps {
   params: Promise<{ slug: string }>;
 }
 
-export function generateStaticParams() {
-  return getAllCategorySlugs().map((slug) => ({ slug }));
+export async function generateStaticParams() {
+  return (await getAllCategorySlugs()).map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
   params,
 }: CategoryPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const category = getCategoryBySlug(slug);
+  const category = await getCategoryBySlug(slug);
   if (!category) {
     return { title: "Category Not Found — FORMEN" };
   }
@@ -39,23 +39,25 @@ export async function generateMetadata({
 
 export default async function CategoryPage({ params }: CategoryPageProps) {
   const { slug } = await params;
-  const category = getCategoryBySlug(slug);
+  const [category, categories] = await Promise.all([
+    getCategoryBySlug(slug),
+    getCategories(),
+  ]);
 
   if (!category) {
     notFound();
   }
 
   const products = await getProductsByCategorySlug(slug);
-  const related = getRelatedCategories(category);
+  const related = getRelatedCategories(category, categories);
 
   return (
     <>
-      <AnnouncementBar />
       <Navbar />
 
-      <main className="mt-24 bg-[#F7F5F1] min-h-screen overflow-x-hidden">
+      <main className="mt-16 bg-[#F7F5F1] min-h-screen overflow-x-hidden">
         <CategoryHero category={category} productCount={products.length} />
-        <CategoryNavigation activeSlug={category.slug} />
+        <CategoryNavigation activeSlug={category.slug} categories={categories} />
         <CategoryClient categoryName={category.name} products={products} />
         <CategoryEditorial category={category} />
         <RelatedCategories categories={related} />

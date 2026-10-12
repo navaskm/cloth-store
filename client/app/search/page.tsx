@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import AnnouncementBar from "@/components/AnnouncementBar";
 import Breadcrumb from "@/components/Breadcrumb";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import ProductCard from "@/components/ProductCard";
-import { CATEGORIES } from "@/lib/catalogData";
-import { getProducts } from "@/lib/api";
-import type { SortOption } from "@/lib/types";
+import { getCategories, getProducts } from "@/lib/api";
+import type { Category, SortOption } from "@/lib/types";
 
 type SearchParams = {
   q?: string | string[];
@@ -53,17 +51,19 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
   const requestedSort = firstParam(params.sort);
   const sort: SortOption = isSortOption(requestedSort) ? requestedSort : "recommended";
 
-  const results = await getProducts({ query, category, sort });
+  const [results, categories] = await Promise.all([
+    getProducts({ query, category, sort }),
+    getCategories(),
+  ]);
 
   const hasQuery = query.length > 0;
   const resultLabel = results.length === 1 ? "piece" : "pieces";
 
   return (
     <>
-      <AnnouncementBar />
       <Navbar />
 
-      <main className="mt-24 min-h-screen overflow-x-hidden bg-[#F7F5F1]">
+      <main className="mt-16 min-h-screen overflow-x-hidden bg-[#F7F5F1]">
         <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Search" }]} />
 
         <section className="max-w-screen-xl mx-auto px-5 pt-10 pb-12 lg:px-10 md:pt-14 md:pb-16">
@@ -103,7 +103,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
                   <label htmlFor="category-filter" className="sr-only">Filter by category</label>
                   <select id="category-filter" name="category" defaultValue={category} className="border border-[#D9D5CE] bg-transparent px-3 py-2.5 text-[10px] font-medium uppercase tracking-[0.15em] text-[#171717]">
                     <option value="">All categories</option>
-                    {CATEGORIES.map((item) => <option key={item.slug} value={item.slug}>{item.name}</option>)}
+                    {categories.map((item) => <option key={item.slug} value={item.slug}>{item.name}</option>)}
                   </select>
                   <label htmlFor="sort-results" className="sr-only">Sort search results</label>
                   <select id="sort-results" name="sort" defaultValue={sort} className="border border-[#D9D5CE] bg-transparent px-3 py-2.5 text-[10px] font-medium uppercase tracking-[0.15em] text-[#171717]">
@@ -121,9 +121,9 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
                   {results.map((product) => <div key={product.id} role="listitem"><ProductCard product={product} /></div>)}
                 </div>
               </section>
-            ) : <NoResults query={query} />}
+            ) : <NoResults query={query} categories={categories} />}
           </>
-        ) : <SearchLanding />}
+        ) : <SearchLanding categories={categories} />}
 
         <section className="border-t border-[#D9D5CE] bg-[#EFECE6]">
           <div className="max-w-screen-xl mx-auto flex flex-col gap-6 px-5 py-14 lg:flex-row lg:items-center lg:justify-between lg:px-10 md:py-20">
@@ -141,20 +141,20 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
   );
 }
 
-function SearchLanding() {
+function SearchLanding({ categories }: { categories: Category[] }) {
   return (
     <section className="max-w-screen-xl mx-auto px-5 pb-20 lg:px-10 md:pb-28">
       <div className="border-t border-[#D9D5CE] pt-8">
         <p className="mb-5 text-[10px] font-medium uppercase tracking-[0.3em] text-[#6B6862]">TRY BROWSING</p>
         <nav className="flex flex-wrap gap-x-6 gap-y-4" aria-label="Browse categories">
-          {CATEGORIES.map((category) => <Link key={category.slug} href={`/category/${category.slug}`} className="text-xs font-semibold uppercase tracking-[0.18em] text-[#171717] transition-colors hover:text-[#9A7653]">{category.name} →</Link>)}
+          {categories.map((category) => <Link key={category.slug} href={`/category/${category.slug}`} className="text-xs font-semibold uppercase tracking-[0.18em] text-[#171717] transition-colors hover:text-[#9A7653]">{category.name} →</Link>)}
         </nav>
       </div>
     </section>
   );
 }
 
-function NoResults({ query }: { query: string }) {
+function NoResults({ query, categories }: { query: string; categories: Category[] }) {
   return (
     <section className="max-w-screen-xl mx-auto px-5 py-16 lg:px-10 md:py-24">
       <div className="max-w-2xl border-t border-[#D9D5CE] pt-8">
@@ -168,7 +168,7 @@ function NoResults({ query }: { query: string }) {
         <div className="mt-14 border-t border-[#D9D5CE] pt-7">
           <p className="mb-4 text-[10px] font-medium uppercase tracking-[0.3em] text-[#6B6862]">TRY BROWSING</p>
           <div className="flex flex-wrap gap-x-6 gap-y-4">
-            {CATEGORIES.map((category) => <Link key={category.slug} href={`/category/${category.slug}`} className="text-xs font-semibold uppercase tracking-[0.18em] text-[#171717] transition-colors hover:text-[#9A7653]">{category.name}</Link>)}
+            {categories.map((category) => <Link key={category.slug} href={`/category/${category.slug}`} className="text-xs font-semibold uppercase tracking-[0.18em] text-[#171717] transition-colors hover:text-[#9A7653]">{category.name}</Link>)}
           </div>
         </div>
       </div>

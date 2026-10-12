@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import AnnouncementBar from "@/components/AnnouncementBar";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 
@@ -41,10 +40,9 @@ const contactChannels: ContactChannel[] = [
 export default function ContactPage() {
   return (
     <>
-      <AnnouncementBar />
       <Navbar />
 
-      <main className="mt-24 min-h-screen bg-[#F7F5F1]">
+      <main className="mt-16 min-h-screen bg-[#F7F5F1]">
         <section className="max-w-screen-xl mx-auto px-5 lg:px-10 pt-10 pb-16 md:pt-14 md:pb-24">
           <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-16 items-end">
             <div className="order-2 lg:order-1 max-w-xl">

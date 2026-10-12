@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import AnnouncementBar from "@/components/AnnouncementBar";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import CategoryDirectoryCard from "@/components/categories/CategoryDirectoryCard";
-import { CATEGORIES } from "@/lib/catalogData";
-import { getProducts } from "@/lib/api";
+import { getCategories, getProducts } from "@/lib/api";
 
 export const metadata: Metadata = {
   title: "Men's Clothing Categories | FORMEN",
@@ -15,17 +13,16 @@ export const metadata: Metadata = {
 };
 
 export default async function CategoriesPage() {
-  const products = await getProducts();
-  const [featuredCategory, ...directoryCategories] = CATEGORIES;
+  const [products, categories] = await Promise.all([getProducts(), getCategories()]);
+  const [featuredCategory, ...directoryCategories] = categories;
   const getActiveProductCount = (categorySlug: string) =>
     products.filter((product) => product.categorySlug === categorySlug).length;
 
   return (
     <>
-      <AnnouncementBar />
       <Navbar />
 
-      <main className="mt-24 min-h-screen overflow-x-hidden bg-[#F7F5F1]">
+      <main className="mt-16 min-h-screen overflow-x-hidden bg-[#F7F5F1]">
 
         <section className="max-w-screen-xl mx-auto px-5 pt-10 pb-16 lg:px-10 md:pt-14 md:pb-24">
           <div className="grid items-end gap-10 lg:grid-cols-[1fr_0.7fr] lg:gap-16">
