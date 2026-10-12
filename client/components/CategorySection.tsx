@@ -1,7 +1,8 @@
 import CategoryCard from "@/components/CategoryCard";
-import { CATEGORIES } from "@/lib/catalogData";
+import { getCategories } from "@/lib/api";
 
-export default function CategorySection() {
+export default async function CategorySection() {
+  const categories = await getCategories();
   return (
     <section
       className="bg-[#F7F5F1] py-20 lg:py-28"
@@ -26,7 +27,7 @@ export default function CategorySection() {
 
         {/* Category Grid */}
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 lg:gap-5">
-          {CATEGORIES.map((category) => (
+          {categories.map((category) => (
             <CategoryCard key={category.id} category={category} />
           ))}
         </div>
