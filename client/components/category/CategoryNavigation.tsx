@@ -1,16 +1,18 @@
 import Link from "next/link";
-import { CATEGORIES } from "@/lib/catalogData";
+import type { Category } from "@/lib/types";
 
 interface CategoryNavigationProps {
   activeSlug: string;
+  categories: Category[];
 }
 
 export default function CategoryNavigation({
   activeSlug,
+  categories,
 }: CategoryNavigationProps) {
   const items = [
     { label: "All", href: "/shop", slug: "all" },
-    ...CATEGORIES.map((category) => ({
+    ...categories.map((category) => ({
       label: category.name,
       href: `/category/${category.slug}`,
       slug: category.slug,

@@ -4,8 +4,7 @@ import Link from "next/link";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import CategoryDirectoryCard from "@/components/categories/CategoryDirectoryCard";
-import { CATEGORIES } from "@/lib/catalogData";
-import { getProducts } from "@/lib/api";
+import { getCategories, getProducts } from "@/lib/api";
 
 export const metadata: Metadata = {
   title: "Men's Clothing Categories | FORMEN",
@@ -14,8 +13,8 @@ export const metadata: Metadata = {
 };
 
 export default async function CategoriesPage() {
-  const products = await getProducts();
-  const [featuredCategory, ...directoryCategories] = CATEGORIES;
+  const [products, categories] = await Promise.all([getProducts(), getCategories()]);
+  const [featuredCategory, ...directoryCategories] = categories;
   const getActiveProductCount = (categorySlug: string) =>
     products.filter((product) => product.categorySlug === categorySlug).length;
 

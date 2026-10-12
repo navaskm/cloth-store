@@ -1,25 +1,18 @@
 "use client";
+import type { Category } from "@/lib/types";
 
 interface CategoryNavigationProps {
   activeCategory: string;
   onCategoryChange: (category: string) => void;
+  categories: Category[];
 }
-
-const SHOP_CATEGORIES = [
-  "All",
-  "Shirts",
-  "T-Shirts",
-  "Jeans",
-  "Trousers",
-  "Casual Wear",
-  "Formal Wear",
-  "Jackets",
-];
 
 export default function CategoryNavigation({
   activeCategory,
   onCategoryChange,
+  categories,
 }: CategoryNavigationProps) {
+  const shopCategories = ["All", ...categories.map((category) => category.name)];
   return (
     <div className="border-y border-[#D9D5CE] bg-[#F7F5F1]">
       <div className="max-w-screen-xl mx-auto px-5 lg:px-10">
@@ -28,7 +21,7 @@ export default function CategoryNavigation({
           className="flex items-center gap-0 overflow-x-auto scrollbar-hide"
           aria-label="Shop by category"
         >
-          {SHOP_CATEGORIES.map((cat) => {
+          {shopCategories.map((cat) => {
             const isActive =
               activeCategory === cat ||
               (activeCategory === "" && cat === "All");

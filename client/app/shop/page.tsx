@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import ShopHeader from "@/components/shop/ShopHeader";
 import ShopClient from "@/components/shop/ShopClient";
 import ShopEditorialCTA from "@/components/shop/ShopEditorialCTA";
-import { getProducts } from "@/lib/api";
+import { getCategories, getProducts } from "@/lib/api";
 
 export const metadata: Metadata = {
   title: "Shop Men's Collection — FORMEN",
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 // Only include active products. In production, replace with an API/DB query.
 export default async function ShopPage() {
-  const activeProducts = await getProducts();
+  const [activeProducts, categories] = await Promise.all([getProducts(), getCategories()]);
   return (
     <>
       <Navbar />
@@ -24,7 +24,7 @@ export default async function ShopPage() {
         <ShopHeader productCount={activeProducts.length} />
 
         {/* All interactive shop logic (client component) */}
-        <ShopClient products={activeProducts} />
+        <ShopClient products={activeProducts} categories={categories} />
 
         {/* Editorial CTA before footer */}
         <ShopEditorialCTA />
