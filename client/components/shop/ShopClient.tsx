@@ -85,7 +85,7 @@ export default function ShopClient({ products, categories }: ShopClientProps) {
 
         <ProductGrid
           products={displayedProducts}
-          totalCount={products.filter((p) => p.isActive !== false).length}
+          totalCount={products.length}
           onClearFilters={handleClearFilters}
         />
       </div>

@@ -1,8 +1,8 @@
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
+import TrendingSection from "@/components/TrendingSection";
 import CategorySection from "@/components/CategorySection";
 import ProductSection from "@/components/ProductSection";
-import FeaturedCollection from "@/components/FeaturedCollection";
 import BrandIntro from "@/components/BrandIntro";
 import ImageBanner from "@/components/ImageBanner";
 import FinalCTA from "@/components/FinalCTA";
@@ -12,34 +12,17 @@ export default function Home() {
   return (
     <>
       <Navbar />
-
-      {/* Main content pushed below fixed header */}
       <main>
-        {/* 1. Hero */}
         <div className="mt-16">
           <HeroSection />
         </div>
-
-        {/* 2. Shop by Category */}
+        <TrendingSection />
         <CategorySection />
-
-        {/* 3. New Arrivals */}
         <ProductSection />
-
-        {/* 4. Featured Collection */}
-        <FeaturedCollection />
-
-        {/* 5. Brand Introduction */}
         <BrandIntro />
-
-        {/* 6. Full-width Fashion Image Banner */}
         <ImageBanner />
-
-        {/* 7. Final CTA */}
         <FinalCTA />
       </main>
-
-      {/* Footer */}
       <Footer />
     </>
   );

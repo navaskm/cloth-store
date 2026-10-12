@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import productsRouter from "./routes/products.js";
 import categoriesRouter from "./routes/categories.js";
+import trendingProductsRouter from "./routes/trendingProducts.js";
 
 const app = express();
 
@@ -11,6 +12,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/api/products", productsRouter);
 app.use("/api/categories", categoriesRouter);
+app.use("/api/trending-products", trendingProductsRouter);
 
 // Test route
 app.get("/", (_req, res) => {

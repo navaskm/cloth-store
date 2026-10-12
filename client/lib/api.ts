@@ -41,6 +41,10 @@ export function getProducts(options: {
   })}`);
 }
 
+export function getTrendingProducts(): Promise<Product[]> {
+  return request<Product[]>("/trending-products");
+}
+
 export function getCategories(): Promise<Category[]> {
   return request<Category[]>("/categories");
 }

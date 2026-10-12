@@ -4,13 +4,11 @@ import type { Category } from "@/lib/types";
 
 interface CategoryDirectoryCardProps {
   category: Category;
-  productCount?: number;
   featured?: boolean;
 }
 
 export default function CategoryDirectoryCard({
   category,
-  productCount,
   featured = false,
 }: CategoryDirectoryCardProps) {
   return (
@@ -41,18 +39,10 @@ export default function CategoryDirectoryCard({
                 <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#9A7653]">
                   {category.name}
                 </p>
-                {productCount !== undefined && (
-                  <p className="text-[10px] uppercase tracking-[0.18em] text-[#6B6862]">
-                    {productCount} {productCount === 1 ? "piece" : "pieces"}
-                  </p>
-                )}
               </div>
               <h3 className="max-w-sm font-editorial text-3xl leading-[0.98] tracking-[-0.04em] text-[#171717] md:text-4xl">
                 {category.name.toUpperCase()}.
               </h3>
-              <p className="mt-5 max-w-sm text-sm leading-relaxed text-[#6B6862] md:text-base">
-                {category.description}
-              </p>
             </div>
 
             <span className="mt-10 inline-flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-[#171717] transition-colors duration-300 group-hover:text-[#9A7653]">

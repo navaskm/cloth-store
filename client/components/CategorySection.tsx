@@ -28,7 +28,7 @@ export default async function CategorySection() {
         {/* Category Grid */}
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 lg:gap-5">
           {categories.map((category) => (
-            <CategoryCard key={category.id} category={category} />
+            <CategoryCard key={category._id} category={category} />
           ))}
         </div>
       </div>

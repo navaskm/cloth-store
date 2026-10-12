@@ -1,22 +1,16 @@
 // Shared types used across the clothing store UI
 
 export interface Category {
-  id: string;
+  _id: string;
   name: string;
   slug: string;
   imageUrl: string;
   imageAlt: string;
   productCount?: number;
-  description: string;
   heroImageUrl: string;
-  heroImageAlt: string;
   editorialHeading: string;
-  editorialText: string;
-  editorialImageUrl: string;
-  editorialImageAlt: string;
   metaTitle: string;
   metaDescription: string;
-  relatedSlugs: string[];
 }
 
 export interface PriceRange {
@@ -31,31 +25,18 @@ export interface ProductImage {
 }
 
 export interface Product {
-  id: string;
+  _id: string;
   name: string;
-  brand: string;
+  brand?: string;
   category: string;
   categorySlug: string;
   slug: string;
   price: number;
-  /** Original price when on sale; display price uses `price` */
-  compareAtPrice?: number;
   imageUrl: string;
-  imageAlt: string;
-  hoverImageUrl?: string;
   /** Full set of gallery images used on the product detail page */
   images?: ProductImage[];
   sizes?: string[];
-  colors?: string[];
-  color?: string;           // primary / default display color
-  material?: string;
-  fit?: string;
-  pattern?: string;
-  collection?: string;
   description?: string;
-  isNew?: boolean;
-  isFeatured?: boolean;
-  isActive?: boolean;
   /** Controls which size guide table to show on the detail page */
   sizeGuideType?: "shirt" | "trouser" | "jacket" | "tshirt";
 }

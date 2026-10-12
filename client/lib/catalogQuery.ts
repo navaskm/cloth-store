@@ -30,39 +30,23 @@ export function applyCatalogQuery(
     sort: SortOption;
   },
 ): Product[] {
-  let result = products.filter((p) => p.isActive !== false);
+  let result = [...products];
 
   if (options.searchQuery.trim()) {
     const q = options.searchQuery.toLowerCase();
     result = result.filter(
       (p) =>
         p.name.toLowerCase().includes(q) ||
-        p.brand.toLowerCase().includes(q) ||
+        (p.brand?.toLowerCase().includes(q) ?? false) ||
         p.category.toLowerCase().includes(q) ||
-        (p.color?.toLowerCase().includes(q) ?? false) ||
-        (p.material?.toLowerCase().includes(q) ?? false) ||
-        (p.colors?.some((c) => c.toLowerCase().includes(q)) ?? false),
+        p.slug.toLowerCase().includes(q),
     );
   }
 
   const { filters } = options;
 
-  if (filters.brand) {
-    result = result.filter((p) => p.brand === filters.brand);
-  }
   if (filters.size) {
     result = result.filter((p) => p.sizes?.includes(filters.size));
-  }
-  if (filters.color) {
-    result = result.filter(
-      (p) => p.color === filters.color || p.colors?.includes(filters.color),
-    );
-  }
-  if (filters.material) {
-    result = result.filter((p) => p.material === filters.material);
-  }
-  if (filters.fit) {
-    result = result.filter((p) => p.fit === filters.fit);
   }
   if (filters.priceMin !== null) {
     result = result.filter((p) => p.price >= (filters.priceMin as number));
@@ -73,9 +57,6 @@ export function applyCatalogQuery(
 
   switch (options.sort) {
     case "newest":
-      result = [...result].sort((a, b) =>
-        a.isNew === b.isNew ? 0 : a.isNew ? -1 : 1,
-      );
       break;
     case "price-asc":
       result = [...result].sort((a, b) => a.price - b.price);
@@ -87,9 +68,7 @@ export function applyCatalogQuery(
       result = [...result].sort((a, b) => a.name.localeCompare(b.name));
       break;
     default:
-      result = [...result].sort((a, b) =>
-        a.isFeatured === b.isFeatured ? 0 : a.isFeatured ? -1 : 1,
-      );
+      result = [...result];
   }
 
   return result;

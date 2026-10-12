@@ -28,7 +28,7 @@ export default function RelatedProducts({ products }: RelatedProductsProps) {
       </div>
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-5 gap-y-10 lg:gap-x-8">
         {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
+          <ProductCard key={product._id} product={product} />
         ))}
       </div>
     </section>

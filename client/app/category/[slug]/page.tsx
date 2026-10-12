@@ -2,17 +2,14 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import CategoryHero from "@/components/category/CategoryHero";
 import CategoryNavigation from "@/components/category/CategoryNavigation";
 import CategoryClient from "@/components/category/CategoryClient";
 import CategoryEditorial from "@/components/category/CategoryEditorial";
-import RelatedCategories from "@/components/category/RelatedCategories";
 import {
   getCategories,
   getAllCategorySlugs,
   getCategoryBySlug,
   getProductsByCategorySlug,
-  getRelatedCategories,
 } from "@/lib/categories";
 
 interface CategoryPageProps {
@@ -49,18 +46,15 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   }
 
   const products = await getProductsByCategorySlug(slug);
-  const related = getRelatedCategories(category, categories);
 
   return (
     <>
       <Navbar />
 
       <main className="mt-16 bg-[#F7F5F1] min-h-screen overflow-x-hidden">
-        <CategoryHero category={category} productCount={products.length} />
         <CategoryNavigation activeSlug={category.slug} categories={categories} />
         <CategoryClient categoryName={category.name} products={products} />
         <CategoryEditorial category={category} />
-        <RelatedCategories categories={related} />
       </main>
 
       <Footer />
