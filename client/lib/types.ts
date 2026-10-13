@@ -37,8 +37,6 @@ export interface Product {
   images?: ProductImage[];
   sizes?: string[];
   description?: string;
-  /** Controls which size guide table to show on the detail page */
-  sizeGuideType?: "shirt" | "trouser" | "jacket" | "tshirt";
 }
 
 export type SortOption =
@@ -60,19 +58,3 @@ export interface FilterState {
 }
 
 // ── Size guide ───────────────────────────────────────────────────────────────
-
-export interface SizeGuideRow {
-  size: string;
-  measurement: string;
-  /** Optional second measurement column label */
-  label2?: string;
-  measurement2?: string;
-}
-
-export interface SizeGuide {
-  type: "shirt" | "trouser" | "jacket" | "tshirt";
-  heading: string;
-  col1: string;
-  col2: string;
-  rows: SizeGuideRow[];
-}

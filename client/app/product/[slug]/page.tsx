@@ -4,14 +4,11 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ProductGallery from "@/components/product/ProductGallery";
 import ProductInfo from "@/components/product/ProductInfo";
-import ProductDetails from "@/components/product/ProductDetails";
-import SizeGuide from "@/components/product/SizeGuide";
 import RelatedProducts from "@/components/product/RelatedProducts";
 import ProductEditorialCTA from "@/components/product/ProductEditorialCTA";
 import {
   getProductBySlug,
   getRelatedProducts,
-  getSizeGuideForProduct,
 } from "@/lib/products";
 
 interface ProductPageProps {
@@ -41,8 +38,6 @@ export default async function ProductPage({ params }: ProductPageProps) {
   }
 
   const related = await getRelatedProducts(product);
-  const sizeGuide = getSizeGuideForProduct(product);
-  const categoryHref = `/category/${product.categorySlug}`;
 
   return (
     <>
@@ -60,8 +55,6 @@ export default async function ProductPage({ params }: ProductPageProps) {
           </div>
         </section>
 
-        <ProductDetails product={product} />
-        <SizeGuide guide={sizeGuide} />
         <RelatedProducts products={related} />
         <ProductEditorialCTA />
       </main>
