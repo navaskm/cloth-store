@@ -9,7 +9,7 @@ interface CategoryCardProps {
 export default function CategoryCard({ category }: CategoryCardProps) {
   return (
     <Link
-      href={`/category/${category.slug}`}
+      href={`/shop?category=${category.slug}`}
       className="group relative block overflow-hidden bg-[#EFECE6]"
       aria-label={`Browse ${category.name}`}
     >

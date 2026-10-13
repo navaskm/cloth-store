@@ -13,7 +13,7 @@ export default function CategoryDirectoryCard({
 }: CategoryDirectoryCardProps) {
   return (
     <Link
-      href={`/category/${category.slug}`}
+      href={`/shop?category=${category.slug}`}
       className={`group block ${featured ? "md:col-span-2" : ""}`}
       aria-label={`Explore ${category.name}`}
     >

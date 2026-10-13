@@ -3,10 +3,10 @@ import Link from "next/link";
 const FOOTER_LINKS = {
   SHOP: [
     { label: "All Products", href: "/shop" },
-    { label: "Shirts", href: "/category/shirts" },
-    { label: "T-Shirts", href: "/category/t-shirts" },
-    { label: "Jeans", href: "/category/jeans" },
-    { label: "Trousers", href: "/category/trousers" },
+    { label: "Shirts", href: "/shop?category=shirts" },
+    { label: "T-Shirts", href: "/shop?category=t-shirts" },
+    { label: "Jeans", href: "/shop?category=jeans" },
+    { label: "Trousers", href: "/shop?category=trousers" },
     { label: "New Arrivals", href: "/shop?collection=new" },
   ],
   COMPANY: [
