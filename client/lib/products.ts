@@ -1,42 +1,14 @@
 import { getProductBySlug as fetchProductBySlug, getProducts } from "@/lib/api";
-import { PRODUCT_DETAIL_COPY, PRODUCT_GALLERIES, SIZE_GUIDES } from "@/lib/catalogData";
-import type { Product, ProductImage, SizeGuide } from "@/lib/types";
+import { PRODUCT_DETAIL_COPY, PRODUCT_GALLERIES } from "@/lib/catalogData";
+import type { Product, ProductImage } from "@/lib/types";
 
 export type ProductDetail = Product & {
   images: ProductImage[];
   description: string;
-  detailsParagraph: string;
-  sizeGuideType: SizeGuide["type"];
 };
 
 function upscaleImageUrl(url: string): string {
   return url.replace(/w=\d+/, "w=1200").replace(/q=\d+/, "q=85");
-}
-
-function inferSizeGuideType(product: Product): SizeGuide["type"] {
-  if (product.sizeGuideType) {
-    return product.sizeGuideType;
-  }
-  if (product.categorySlug === "jeans" || product.categorySlug === "trousers") {
-    return "trouser";
-  }
-  if (product.categorySlug === "jackets") {
-    return "jacket";
-  }
-  if (product.categorySlug === "t-shirts") {
-    return "tshirt";
-  }
-  if (
-    product.categorySlug === "formal-wear" &&
-    product.name.toLowerCase().includes("blazer")
-  ) {
-    return "jacket";
-  }
-  const firstSize = product.sizes?.[0];
-  if (firstSize && /^\d+$/.test(firstSize) && Number(firstSize) >= 28) {
-    return Number(firstSize) >= 36 ? "jacket" : "trouser";
-  }
-  return "shirt";
 }
 
 function buildDefaultGallery(product: Product): ProductImage[] {
@@ -74,9 +46,6 @@ export function enrichProduct(product: Product): ProductDetail {
     ...product,
     images: gallery,
     description: product.description ?? copy?.description ?? defaultDescription(product),
-    detailsParagraph:
-      copy?.detailsParagraph ?? defaultDetailsParagraph(product),
-    sizeGuideType: inferSizeGuideType(product),
   };
 }
 
@@ -95,12 +64,6 @@ export async function getRelatedProducts(product: Product, limit = 4): Promise<P
   if (sameCategory.length >= limit) return sameCategory.slice(0, limit);
   const allProducts = await getProducts();
   return allProducts.filter((item) => item._id !== product._id).slice(0, limit);
-}
-
-export function getSizeGuideForProduct(
-  product: Pick<ProductDetail, "sizeGuideType">,
-): SizeGuide {
-  return SIZE_GUIDES[product.sizeGuideType];
 }
 
 export function formatProductPrice(product: Product): string {
