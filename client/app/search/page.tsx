@@ -147,7 +147,7 @@ function SearchLanding({ categories }: { categories: Category[] }) {
       <div className="border-t border-[#D9D5CE] pt-8">
         <p className="mb-5 text-[10px] font-medium uppercase tracking-[0.3em] text-[#6B6862]">TRY BROWSING</p>
         <nav className="flex flex-wrap gap-x-6 gap-y-4" aria-label="Browse categories">
-          {categories.map((category) => <Link key={category.slug} href={`/category/${category.slug}`} className="text-xs font-semibold uppercase tracking-[0.18em] text-[#171717] transition-colors hover:text-[#9A7653]">{category.name} →</Link>)}
+          {categories.map((category) => <Link key={category.slug} href={`/shop?category=${category.slug}`} className="text-xs font-semibold uppercase tracking-[0.18em] text-[#171717] transition-colors hover:text-[#9A7653]">{category.name} →</Link>)}
         </nav>
       </div>
     </section>
@@ -168,7 +168,7 @@ function NoResults({ query, categories }: { query: string; categories: Category[
         <div className="mt-14 border-t border-[#D9D5CE] pt-7">
           <p className="mb-4 text-[10px] font-medium uppercase tracking-[0.3em] text-[#6B6862]">TRY BROWSING</p>
           <div className="flex flex-wrap gap-x-6 gap-y-4">
-            {categories.map((category) => <Link key={category.slug} href={`/category/${category.slug}`} className="text-xs font-semibold uppercase tracking-[0.18em] text-[#171717] transition-colors hover:text-[#9A7653]">{category.name}</Link>)}
+            {categories.map((category) => <Link key={category.slug} href={`/shop?category=${category.slug}`} className="text-xs font-semibold uppercase tracking-[0.18em] text-[#171717] transition-colors hover:text-[#9A7653]">{category.name}</Link>)}
           </div>
         </div>
       </div>

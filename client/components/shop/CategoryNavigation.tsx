@@ -12,7 +12,13 @@ export default function CategoryNavigation({
   onCategoryChange,
   categories,
 }: CategoryNavigationProps) {
-  const shopCategories = ["All", ...categories.map((category) => category.name)];
+  const shopCategories = [
+    { name: "All", slug: "" },
+    ...categories.map((category) => ({
+      name: category.name,
+      slug: category.slug,
+    })),
+  ];
   return (
     <div className="border-y border-[#D9D5CE] bg-[#F7F5F1]">
       <div className="max-w-screen-xl mx-auto px-5 lg:px-10">
@@ -22,13 +28,11 @@ export default function CategoryNavigation({
           aria-label="Shop by category"
         >
           {shopCategories.map((cat) => {
-            const isActive =
-              activeCategory === cat ||
-              (activeCategory === "" && cat === "All");
+            const isActive = activeCategory === cat.slug;
             return (
               <button
-                key={cat}
-                onClick={() => onCategoryChange(cat === "All" ? "" : cat)}
+                key={cat.slug || "all"}
+                onClick={() => onCategoryChange(cat.slug)}
                 className={`
                   relative shrink-0 px-4 py-4 text-[10px] tracking-[0.2em] font-medium
                   transition-colors duration-200 whitespace-nowrap
@@ -40,7 +44,7 @@ export default function CategoryNavigation({
                 `}
                 aria-current={isActive ? "true" : undefined}
               >
-                {cat.toUpperCase()}
+                {cat.name.toUpperCase()}
               </button>
             );
           })}

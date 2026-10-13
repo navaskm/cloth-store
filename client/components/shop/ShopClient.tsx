@@ -22,12 +22,16 @@ import {
 interface ShopClientProps {
   products: Product[];
   categories: Category[];
+  initialCategory?: string;
 }
 
-export default function ShopClient({ products, categories }: ShopClientProps) {
-  
+export default function ShopClient({
+  products,
+  categories,
+  initialCategory = "",
+}: ShopClientProps) {
   const [searchQuery, setSearchQuery] = useState("");
-  const [activeCategory, setActiveCategory] = useState("");
+  const [activeCategory, setActiveCategory] = useState(initialCategory);
   const [sortValue, setSortValue] = useState<SortOption>("recommended");
   const [filters, setFilters] = useState(DEFAULT_FILTERS);
   const [filterPanelOpen, setFilterPanelOpen] = useState(false);
@@ -45,7 +49,7 @@ export default function ShopClient({ products, categories }: ShopClientProps) {
 
   const displayedProducts = useMemo(() => {
     const scoped = activeCategory
-      ? products.filter((p) => p.category === activeCategory)
+      ? products.filter((p) => p.categorySlug === activeCategory)
       : products;
 
     return applyCatalogQuery(scoped, {

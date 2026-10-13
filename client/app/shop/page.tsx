@@ -12,15 +12,27 @@ export const metadata: Metadata = {
 };
 
 // Only include active products. In production, replace with an API/DB query.
-export default async function ShopPage() {
-  const [activeProducts, categories] = await Promise.all([getProducts(), getCategories()]);
+interface ShopPageProps {
+  searchParams: Promise<{ category?: string }>;
+}
+
+export default async function ShopPage({ searchParams }: ShopPageProps) {
+  const [{ category }, activeProducts, categories] = await Promise.all([
+    searchParams,
+    getProducts(),
+    getCategories(),
+  ]);
   return (
     <>
       <Navbar />
 
       <main className="mt-16 bg-[#F7F5F1] min-h-screen">
         {/* All interactive shop logic (client component) */}
-        <ShopClient products={activeProducts} categories={categories} />
+        <ShopClient
+          products={activeProducts}
+          categories={categories}
+          initialCategory={category}
+        />
 
         {/* Editorial CTA before footer */}
         <ShopEditorialCTA />
